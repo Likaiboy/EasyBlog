@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../css/page.css">
+		
+	</head>   
+	<body style="width:100%;padding:0px;margin:0px">
+		<header>
+			<div class="header" >
+				<div class="header-container">
+					<div class="search-field">
+						
+						<input type="text" placeholder=" 搜索你想要的" class="input-field">
+						
+						<div class="img-field">
+							<a class="normal-a">
+								<img src="../img/search.png" class="search-img"/>
+							</a>
+						</div>
+					</div>
+					<nav class="navigation">
+						<a href="./index.html">博客首页</a>
+						<a href="#">随笔</a>
+						<a href="#">简历</a>
+					</nav>
+					
+				</div>
+			</div>	
+		</header>
+		<div class="container" style="width:100%;margin:30 0 0 0;float:left;height:500px;">
+			<div class="tree">
+				<span class="normal-text">博客分类</span>
+				<ul>
+					<li class="list">
+						<a>c++</a>
+					</li>
+					<li class="list">
+						<a>JavaScript</a>
+					</li>
+					<li class="list">
+						<a>Node.js</a>
+					</li>
+					<li class="list">
+						<a>React.js</a>
+					</li>
+				</ul>
+				
+			</div>
+			
+			<div class="list-content" >
+				<ul>
+					<% for(i=0;i<blogList.length;i++){%>
+						<li class="title-list"><a href="#"><h3><%= blogList[i].title %></h3></a></li>
+					<%}%>
+					
+					
+				</ul>
+				
+				
+			</div>
+			
+			
+		</div>
+		
+	</body>
+</html>

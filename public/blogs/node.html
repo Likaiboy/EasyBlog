@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="../css/page.css">
+	</head>   
+	<body style="width:100%;padding:0px;margin:0px">
+		<header>
+			<div class="header" >
+				<div class="header-container">
+					<div class="search-field">
+						
+						<input type="text" placeholder=" 搜索你想要的" class="input-field">
+						
+						<div class="img-field">
+							<a class="normal-a">
+								<img src="../img/search.png" class="search-img"/>
+							</a>
+						</div>
+					</div>
+					<nav class="navigation">
+						<a href="#">博客首页</a>
+						<a href="#">随笔</a>
+						<a href="#">简历</a>
+					</nav>
+					
+				</div>
+			</div>	
+		</header>
+		<div class="container" style="width:100%;margin:30 0 0 0;float:left;height:500px;">
+			<div class="tree">
+				<span class="normal-text">热门标签</span>
+				<ul>
+					<li class="list">
+						<a>c++</a>
+					</li>
+					<li class="list">
+						<a>JavaScript</a>
+					</li>
+					<li class="list">
+						<a>Node.js</a>
+					</li>
+					<li class="list">
+						<a>React.js</a>
+					</li>
+				</ul>
+				
+			</div>
+			<div class="content" >
+				<div class="title-div">
+					<h2>Node.js笔记（十）Nodejs与DOM操作</h2>
+					<div class="topic">
+						<a  href="#" class="topic-name">
+							<span>功能</span>
+						</a>
+						
+					</div>
+				</div>
+				<div class="article-div">
+					<p>Nodejs作为后端语言，直接进行DOM操作是违背分离原则的。  <br>
+但如果是个人的小网站，稍微灵活一点也没有坏处不是。  <br>
+这里介绍的是cheerio这个插件，是基于jquery实现并稍有精简，目的是为nodejs提供像jquery一样的dom操作  <br>
+<strong>ps：本来jsdom也是一种选择，但可惜最新版本的jsdom不再支持nodejs</strong></p>
+
+<p>下面看一个例子：</p>
+
+<p>//这个方法从filelist.txt里面读出文件名，将其添加到index.html中类为listselect的select标签下</p>
+
+
+					
+					
+					
+<pre><code>
+function getFileList(){
+    var content = fs.readFileSync('./index.html');
+    $ = cheerio.load(content);
+    $('select.listselect').empty();
+    lineReader.eachLine('./filelist.txt',function(line,last){
+		//lineReader是一个按行读取文件的nodejs插件，可自行安装
+		var file = line.substr(line.lastIndexOf(' ')+1);
+		$('select.listselect').append('<option class="listoption" value='+file+'>;'+file+'</option>');
+		if(last){
+			fs.writeFile("./index.html", $.html(),function(err）{
+				if(err) throw err;
+				console.log("Saved");
+			});
+			return false;  
+		}
+	});
+}
+</code></pre>
+
+<p>关于为什么会有</p>
+
+<pre><code>$ = cheerio.load(content);
+</code></pre>
+
+<p>这样的写法确实很让人纠结，必须是$这个符号不然就会出错，我个人理解成为了看起来和jquery里的选择器保持一致而特意这样写的</p>
+
+<p>更多操作可以看  <br>
+<a href="https://npmjs.org/package/cheerio">https://npmjs.org/package/cheerio</a>  <br>
+官方文档或者下面的翻译文档  <br>
+<a href="https://cnodejs.org/topic/5203a71844e76d216a727d2e">https://cnodejs.org/topic/5203a71844e76d216a727d2e</a></p>
+
+				</div>
+				
+				
+			</div>
+			<div class="nagivator"></div>
+			
+		</div>
+		
+	</body>
+</html>
